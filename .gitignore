@@ -1,0 +1,5 @@
+# Development environment specific files and folders
+.idea/
+
+# Multimedia files
+*.mp4
