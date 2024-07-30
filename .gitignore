@@ -1,5 +1,6 @@
 # Development environment specific files and folders
 .idea/
+./training/football-players-detection-1
 
 # Multimedia files
 *.mp4
