@@ -3,3 +3,7 @@
 
 # Multimedia files
 *.mp4
+*.avi
+
+# Models
+*.pt
