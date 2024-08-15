@@ -11,10 +11,12 @@ from utils import get_center_of_bbox, get_bbox_width
 
 class Tracker:
     def __init__(self, model_path):
+
         self.model = YOLO(model_path)
         self.tracker = sv.ByteTrack()
 
     def detect_frames(self, frames):
+
         batch_size = 20
         detections = []
         for i in range(0, len(frames), batch_size):
@@ -154,7 +156,8 @@ class Tracker:
 
             # Draw Players
             for track_id, player in player_dict.items():
-                frame = self.draw_ellipse(frame, player['bbox'], (0,0,255), track_id)
+                color = player.get('team_color', (0, 0, 255))
+                frame = self.draw_ellipse(frame, player['bbox'], color, track_id)
 
             # Draw Referees
             for _, referee in referee_dict.items():
