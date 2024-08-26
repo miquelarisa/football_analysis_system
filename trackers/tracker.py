@@ -161,7 +161,7 @@ class Tracker:
 
             # Draw Referees
             for _, referee in referee_dict.items():
-                frame = self.draw_ellipse(frame, referee['bbox'], (0, 255, 255))
+                frame = self.draw_ellipse(frame, referee['bbox'], (0,255,255))
 
             # Draw Ball
             for track_id, ball in ball_dict.items():
