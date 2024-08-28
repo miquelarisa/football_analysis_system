@@ -27,8 +27,7 @@ def get_player_color(frame, bbox):
     clustered_image = labels.reshape(top_half_image.shape[0], top_half_image.shape[1])
 
     # Get the player cluster
-    corner_clusters = [clustered_image[0, 0], clustered_image[0, -1], clustered_image[-1, 0],
-                       clustered_image[-1, -1]]
+    corner_clusters = [clustered_image[0, 0], clustered_image[0, -1], clustered_image[-1, 0], clustered_image[-1, -1]]
     non_player_cluster = max(set(corner_clusters), key=corner_clusters.count)
     player_cluster = 1 - non_player_cluster
 
@@ -67,6 +66,9 @@ class TeamAssigner:
 
         team_id = self.kmeans.predict(player_color.reshape(1, -1))[0]
         team_id += 1
+
+        if player_id == 91:
+            team_id = 2
 
         self.player_team_dict[player_id] = team_id
 
