@@ -5,7 +5,9 @@ development_and_analysis/training/football-players-detection-1/
 # Multimedia files
 *.mp4
 *.avi
+*.mkv
 *.jpg
+*.png
 
 # Models
 *.pt

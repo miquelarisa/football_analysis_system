@@ -6,7 +6,7 @@ def get_clustering_model(image):
     image_2d = image.reshape(-1, 3)
 
     # Preform K-means with 2 clusters
-    kmeans = KMeans(n_clusters=2, init="k-means++", n_init=1)
+    kmeans = KMeans(n_clusters=2, init="k-means++", n_init=10)
     kmeans.fit(image_2d)
 
     return kmeans
@@ -59,6 +59,11 @@ class TeamAssigner:
         self.team_colors[2] = kmeans.cluster_centers_[1]
 
     def get_player_team(self, frame, player_bbox, player_id):
+        if player_id == 108:
+            return 1
+        if player_id == 337:
+            return 2
+
         if player_id in self.player_team_dict:
             return self.player_team_dict[player_id]
 
@@ -66,11 +71,6 @@ class TeamAssigner:
 
         team_id = self.kmeans.predict(player_color.reshape(1, -1))[0]
         team_id += 1
-
-        if player_id == 108:
-            team_id = 1
-        if player_id == 337:
-            team_id = 2
 
         self.player_team_dict[player_id] = team_id
 
