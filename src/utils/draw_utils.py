@@ -1,7 +1,6 @@
 import numpy as np
 import cv2
-import sys
-from src.utils import get_center_of_bbox, get_bbox_width
+from src.utils import get_center_of_bbox, get_bbox_width, get_foot_position
 
 
 def draw_ellipse(frame, bbox, color, track_id=None):
@@ -141,6 +140,33 @@ def draw_camera_movement(frames, camera_movement_per_frame):
         frame = cv2.putText(frame, f"Camera Movement Y: {y_movement:.2f}", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 1,
                             (0, 0, 0), 3)
 
+        output_frames.append(frame)
+
+    return output_frames
+
+
+def draw_speed_and_distance(frames, tracks):
+    output_frames = []
+    for frame_num, frame in enumerate(frames):
+        for object, object_tracks in tracks.items():
+            if object == "ball" or object == "referees":
+                continue
+            for _, track_info in object_tracks[frame_num].items():
+                if "speed" in track_info:
+                    speed = track_info.get('speed', None)
+                    distance = track_info.get('distance', None)
+                    if speed is None or distance is None:
+                        continue
+
+                    bbox = track_info['bbox']
+                    position = get_foot_position(bbox)
+                    position = list(position)
+                    position[1] += 40
+
+                    position = tuple(map(int, position))
+                    cv2.putText(frame, f"{speed:.2f} km/h", position, cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+                    cv2.putText(frame, f"{distance:.2f} m", (position[0], position[1] + 20),
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
         output_frames.append(frame)
 
     return output_frames
