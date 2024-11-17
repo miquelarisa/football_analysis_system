@@ -16,3 +16,4 @@ data/testing_data
 
 # Others
 *.rar
+*.ipynb_checkpoints
