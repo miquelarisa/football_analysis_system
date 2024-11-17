@@ -1,6 +1,7 @@
 # Development environment specific files and folders
 .idea/
 development_and_analysis/training/football-players-detection-1/
+data/testing_data
 
 # Multimedia files
 *.mp4
@@ -12,3 +13,6 @@ development_and_analysis/training/football-players-detection-1/
 # Models
 *.pt
 *.pkl
+
+# Others
+*.rar
