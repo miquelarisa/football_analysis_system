@@ -1,20 +1,22 @@
 from utils import read_video, save_video, draw_annotations, draw_camera_movement, draw_speed_and_distance
 from trackers import Tracker, interpolate_ball_positions, add_position_to_tracks
-import numpy as np
 from team_assigner import TeamAssigner
 from player_ball_assigner import PlayerBallAssigner
 from camera_movement_estimator import CameraMovementEstimator, add_adjust_positions_to_tracks
 from view_transformer import ViewTransformer
 from speed_and_distance_estimator import SpeedAndDistanceEstimator
 
+import numpy as np
+import json
+
 
 def main():
-    video_name = '08fd33_4'
+    video_name = '2_Liverpool_Madrid'
     # Read Video
     video_frames, fps = read_video('data/input_videos/' + video_name + '.mp4')
 
     # Initialize Tracker
-    tracker = Tracker('data/models/v8/best.pt')
+    tracker = Tracker('data/models/500epochs/v5/best.pt')
 
     tracks = tracker.get_object_tracks(video_frames,
                                        read_from_stub=True,
@@ -27,12 +29,19 @@ def main():
     camera_movement_estimator = CameraMovementEstimator(video_frames[0])
     camera_movement_per_frame = camera_movement_estimator.get_camera_movement(video_frames,
                                                                               read_from_stub=True,
-                                                                              stub_path='data/stubs/camera_movement' +
+                                                                              stub_path='data/stubs/camera_movement_' +
                                                                                         video_name + '.pkl')
     add_adjust_positions_to_tracks(tracks, camera_movement_per_frame)
 
     # View transformer
-    view_transformer = ViewTransformer()
+    with open('config/reference_points.json', 'r') as file:
+        reference_points = json.load(file)
+
+    points = reference_points[video_name]["points"]
+    court_width = reference_points[video_name]["court_width"]
+    court_length = reference_points[video_name]["court_length"]
+
+    view_transformer = ViewTransformer(points, court_width, court_length)
     view_transformer.add_transformed_position_to_tracks(tracks)
 
     # Interpolate Ball Positions

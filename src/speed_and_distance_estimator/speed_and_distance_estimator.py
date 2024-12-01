@@ -2,7 +2,7 @@ import cv2
 from src.utils import measure_distance
 
 
-class SpeedAndDistanceEstimator():
+class SpeedAndDistanceEstimator:
     def __init__(self, fps):
         self.frame_window = 5
         self.frame_rate = fps
