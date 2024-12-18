@@ -1,0 +1,32 @@
+{
+  "1_Wolfsburg": {
+    "points": [[110, 1035], [265, 275], [910, 260], [1640, 915]],
+    "court_width": 68,
+    "court_length": 23.33
+  },
+  "2_Liverpool_Madrid": {
+    "points": [[154, 1045], [219, 201], [1188, 159], [1853, 878]],
+    "court_width": 75,
+    "court_length": 46.28
+  },
+  "3_Brasil_Mexico": {
+    "points": [[139, 440], [285, 214], [1734, 212], [1885, 441]],
+    "court_width": 68,
+    "court_length": 21
+  },
+  "4_Spain_Italy": {
+    "points": [[700, 941], [999, 303], [1488, 317], [1705, 1000]],
+    "court_width": 68,
+    "court_length": 23.33
+  },
+  "5_Spain_England": {
+    "points": [[298, 943], [851, 335], [1555, 345], [1804, 1001]],
+    "court_width": 68,
+    "court_length": 23.33
+  },
+  "Manlleu2": {
+    "points": [[298, 943], [851, 335], [1555, 345], [1804, 1001]],
+    "court_width": 68,
+    "court_length": 23.33
+  }
+}
