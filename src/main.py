@@ -16,7 +16,7 @@ def main():
     video_frames, fps = read_video('data/input_videos/' + video_name + '.mp4')
 
     # Initialize Tracker
-    tracker = Tracker('data/models/500epochs/v5/best.pt')
+    tracker = Tracker('data/models/500epochs/v8/best.pt')
 
     tracks = tracker.get_object_tracks(video_frames,
                                        read_from_stub=True,
