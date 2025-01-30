@@ -11,7 +11,7 @@ import json
 
 
 def main():
-    video_name = '2_Liverpool_Madrid'
+    video_name = '4_Spain_Italy'
     # Read Video
     video_frames, fps = read_video('data/input_videos/' + video_name + '.mp4')
 
